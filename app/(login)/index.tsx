@@ -1,0 +1,13 @@
+import { Text } from 'react-native-paper'
+import { View, StyleSheet } from 'react-native'
+export default function Login() {
+    return <View style={style.container}><Text>This is the login </Text></View>
+}
+
+const style = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
+})
