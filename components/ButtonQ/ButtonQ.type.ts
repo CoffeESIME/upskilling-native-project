@@ -2,5 +2,5 @@ import { BasePropsQ } from "../../utils/generalTypes"
 export type ButtonQProps = BasePropsQ & {
     text: string;
     onPress: ()=>void;
-    mode: string;
+    mode: "outlined" | "contained" | "elevated" 
 } 
