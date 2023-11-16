@@ -1,25 +1,16 @@
-import {
-  DarkTheme,
-  ThemeProvider,
-} from '@react-navigation/native';
-import { SplashScreen, Stack } from 'expo-router';
-
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
-
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
-
+import { Stack } from 'expo-router';
+import { Provider } from 'react-redux';
+import { store } from '../src/store';
 // eslint-disable-next-line react/function-component-definition
-export default function RootLayout() {
-
+export default function Layout() {
   return (
-    <ThemeProvider value={ DarkTheme}>
+    <Provider store={store}>
       <Stack>
-        <Stack.Screen name="(login)" options={{ headerShown: false, statusBarColor: 'black' }} />
+        <Stack.Screen
+          name="login"
+          options={{ headerShown: false, statusBarColor: 'black' }}
+        />
       </Stack>
-    </ThemeProvider>
+    </Provider>
   );
 }

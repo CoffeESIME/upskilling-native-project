@@ -1,0 +1,89 @@
+{
+  "response_code": 0,
+  "results": [
+    {
+      "category": "Geography",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What country is not a part of Scandinavia?",
+      "correct_answer": "Finland",
+      "incorrect_answers": ["Norway", "Sweden", "Denmark"]
+    },
+    {
+      "category": "Entertainment: Video Games",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What was the name of the hero in the 80s animated video game &#039;Dragon&#039;s Lair&#039;?",
+      "correct_answer": "Dirk the Daring",
+      "incorrect_answers": ["Arthur", "Sir Toby Belch", "Guy of Gisbourne"]
+    },
+    {
+      "category": "History",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "What did the first vending machines in the early 1880&#039;s dispense?",
+      "correct_answer": "Post cards",
+      "incorrect_answers": ["Alcohol", "Cigarettes", "Sodas "]
+    },
+    {
+      "category": "Science & Nature",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Which of the following is NOT a real element?",
+      "correct_answer": "Vitrainium",
+      "incorrect_answers": ["Praseodymium", "Hassium", "Lutetium"]
+    },
+    {
+      "category": "Entertainment: Video Games",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "In Counter Strike: Global Offensive, what is the code implanted onto the C4 as the Terrorists plant the bomb?",
+      "correct_answer": "7355608",
+      "incorrect_answers": ["7890728", "7256380", "7726354"]
+    },
+    {
+      "category": "Geography",
+      "type": "boolean",
+      "difficulty": "hard",
+      "question": "Switzerland has four national languages, English being one of them.",
+      "correct_answer": "False",
+      "incorrect_answers": ["True"]
+    },
+    {
+      "category": "Vehicles",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "In 2014, over 6 million General Motors vehicles were recalled due to what critical flaw?",
+      "correct_answer": "Faulty ignition switch",
+      "incorrect_answers": [
+        "Malfunctioning gas pedal",
+        "Breaking fuel lines",
+        "Faulty brake pads"
+      ]
+    },
+    {
+      "category": "Entertainment: Television",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Which of these in the Star Trek series is NOT Klingon food?",
+      "correct_answer": "Hors d&#039;oeuvre",
+      "incorrect_answers": ["Racht", "Gagh", "Bloodwine"]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Which of the following famous mathematicians died in a duel at the age of 20?",
+      "correct_answer": "Galois",
+      "incorrect_answers": ["Abel", "Euler", "Gauss"]
+    },
+    {
+      "category": "Entertainment: Music",
+      "type": "multiple",
+      "difficulty": "hard",
+      "question": "Which of these artists did NOT feature in the fitfh studio album &quot;Humanz&quot; by British virtual band Gorillaz?",
+      "correct_answer": "Snoop Dogg",
+      "incorrect_answers": ["Vince Staples", "Pusha T", "Danny Brown"]
+    }
+  ]
+}
