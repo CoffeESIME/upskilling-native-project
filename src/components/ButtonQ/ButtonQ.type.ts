@@ -1,4 +1,4 @@
-import { BasePropsQ } from "../../utils/generalTypes"
+import { BasePropsQ } from "../../../utils/generalTypes"
 export type ButtonQProps = BasePropsQ & {
     text: string;
     onPress: ()=>void;
