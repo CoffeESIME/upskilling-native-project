@@ -1,4 +1,3 @@
-import { Text } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
 import { ControlledInputQ } from '../../src/components/ControlledInputQ/ControlledInputQ';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -25,7 +24,6 @@ export default function Login() {
   const onCancel = () => {
     router.push('/');
   };
-  console.log(errors);
   return (
     <View style={style.container}>
       <ControlledInputQ
@@ -44,8 +42,14 @@ export default function Login() {
         mode="contained"
         onPress={handleSubmit(onSubmit)}
         text="Submit"
+        style={style.button}
       />
-      <ButtonQ mode="outlined" onPress={onCancel} text="Cancel" />
+      <ButtonQ
+        mode="outlined"
+        onPress={onCancel}
+        text="Cancel"
+        style={style.button}
+      />
     </View>
   );
 }
@@ -56,5 +60,13 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 10,
+  },
+  button: {
+    maxHeight: 40,
+    alignContent: 'stretch',
+    alignSelf: 'auto',
+    justifyContent: 'flex-start',
+    maxWidth: 300,
+    width: '100%'
   },
 });
