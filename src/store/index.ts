@@ -1,14 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authSlice from "./slices/auth-slice";
-import questionsSlice from "./slices/questions-slice";
+import authSlice from "./features/auth-slice";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-
+import { quoteApi } from "./services/quotesApi";
+import { setupListeners } from "@reduxjs/toolkit/query";
 export const store = configureStore({
     reducer:{
         auth: authSlice,
-        questions: questionsSlice
-    }
+        [quoteApi.reducerPath] : quoteApi.reducer
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(quoteApi.middleware)
 })
+
+setupListeners(store.dispatch)
 
 export type AppDispatch = typeof store.dispatch
 export type RootState = ReturnType<typeof store.getState>

@@ -7,7 +7,7 @@ export default function Layout() {
     <Provider store={store}>
       <Stack>
         <Stack.Screen
-          name="login"
+          name="index"
           options={{ headerShown: false, statusBarColor: 'black' }}
         />
       </Stack>

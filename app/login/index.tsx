@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form';
 import { UserInfoSchema, UserInfo } from '../../src/schemas/user.schema';
 import { ButtonQ } from '../../src/components/ButtonQ/ButtonQ';
 import { useAppDispatch } from '../../src/store';
-import { authActions } from '../../src/store/slices/auth-slice';
-import { useAppSelector } from '../../src/store';
+import { authActions } from '../../src/store/features/auth-slice';
+import { useRouter } from 'expo-router';
 // eslint-disable-next-line react/function-component-definition
 export default function Login() {
   const {
@@ -17,15 +17,15 @@ export default function Login() {
   } = useForm<UserInfo>({
     resolver: zodResolver(UserInfoSchema),
   });
-
-  const value = useAppSelector(state => state.auth.isLoggedIn)
-
-  const dispatch = useAppDispatch()
-  console.log('the value logging',value)
+  const router = useRouter();
+  const dispatch = useAppDispatch();
   const onSubmit = () => {
-    dispatch( authActions.login())
-  }
-  console.log(errors)
+    dispatch(authActions.login());
+  };
+  const onCancel = () => {
+    router.push('/');
+  };
+  console.log(errors);
   return (
     <View style={style.container}>
       <ControlledInputQ
@@ -36,16 +36,16 @@ export default function Login() {
       />
       <ControlledInputQ
         control={control}
-        label="Username"
+        label="Password"
         name="password"
         placeholder="Username"
       />
-      <Text>This is the login </Text>
       <ButtonQ
         mode="contained"
         onPress={handleSubmit(onSubmit)}
         text="Submit"
       />
+      <ButtonQ mode="outlined" onPress={onCancel} text="Cancel" />
     </View>
   );
 }
@@ -55,6 +55,6 @@ const style = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'black',
+    gap: 10,
   },
 });

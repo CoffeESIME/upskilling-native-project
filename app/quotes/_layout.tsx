@@ -4,7 +4,10 @@ import { HeaderQ } from '../../src/components/HeaderQ/HeaderQ';
 export default function QuotesLayout() {
   return (
     <Stack>
-      <Stack.Screen name="index" options={{ title: 'Login second', header: ()=> <HeaderQ/>  }} />
+      <Stack.Screen
+        name="index"
+        options={{ title: 'Quotes', header: () => <HeaderQ /> }}
+      />
     </Stack>
   );
 }
