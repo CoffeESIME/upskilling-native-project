@@ -5,6 +5,8 @@ import { CardQ } from '../../src/components/CardQ/CardQ';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../src/store';
 import { answersActions } from '../../src/store/features/quotes-slice';
+import { ButtonQ } from '../../src/components/ButtonQ/ButtonQ';
+import { useRouter } from 'expo-router';
 // eslint-disable-next-line react/function-component-definition
 export default function Quotes() {
   const { data, error, isLoading, isFetching } = useGetQuotesQuery({
@@ -13,6 +15,7 @@ export default function Quotes() {
   });
   const [questionEl, setQuestionEl] = useState<number>(0);
   const [responses, setResponses] = useState(['']);
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const correctAnswers: string[] = [];
   useEffect(() => {
@@ -22,14 +25,15 @@ export default function Quotes() {
       }
       setResponses(new Array(data?.results.length).fill(''));
       dispatch(answersActions.setAnwers(correctAnswers));
-      console.log(correctAnswers);
     }
   }, [data]);
-  const action = (answer: string) => {
-    console.log('question action', answer);
-    const newRes = responses;
-    newRes[questionEl] = answer;
-    setResponses(newRes);
+  useEffect(() => {
+    dispatch(answersActions.setUserAnswers(responses));
+  }, [responses]);
+  const action = (answer: string, id: number) => {
+    setResponses(
+      responses.map((answerEl, index) => (index === id ? answer : answerEl))
+    );
   };
   const goNextEl = () => {
     const next = questionEl + 1;
@@ -39,8 +43,9 @@ export default function Quotes() {
     const prev = questionEl - 1;
     setQuestionEl(prev);
   };
-  console.log('the data', data, error, isLoading, isFetching);
-  console.log(responses);
+  const goReview = () => {
+    router.push('/review/');
+  };
   if (isLoading || isFetching)
     return (
       <View style={style.container}>
@@ -55,13 +60,69 @@ export default function Quotes() {
     );
   return (
     <View style={style.container}>
+      <View
+        style={{
+          height: '50%',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <View
+          style={{
+            height: '30%',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: 'gray',
+            borderRadius: 30,
+          }}
+        >
+          <Text
+            style={{
+              flex: 0,
+              backgroundColor: 'red',
+              fontSize: 40,
+              margin: 20,
+            }}
+          >
+            Select the correct answers
+          </Text>
+          <Text
+            style={{
+              flex: 0,
+              backgroundColor: 'red',
+              fontSize: 20,
+              margin: 10,
+            }}
+          >
+            You will recieve the correction inmediatly
+          </Text>
+        </View>
+      </View>
       <CardQ
+        action={
+          <ButtonQ
+            onPress={goReview}
+            style={{
+              flexGrow: 0,
+              minHeight: 35,
+              flex: 1,
+              maxHeight: 35,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Text>Confirm</Text>
+          </ButtonQ>
+        }
         element={questionEl}
         next={goNextEl}
         prev={goPrevEl}
         question={data?.results[questionEl]}
         selectAnswer={action}
-        showNext={questionEl >= 0 && questionEl < data?.results.length - 1}
+        showAction={questionEl == data?.results.length - 1}
+        showNext={
+          questionEl >= 0 ? questionEl < data?.results.length - 1 : null
+        }
         showPrev={questionEl > 0}
       />
     </View>
@@ -74,5 +135,8 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'black',
+    alignContent: 'center',
+    alignSelf: 'center',
+    width: '100%',
   },
 });

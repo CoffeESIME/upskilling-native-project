@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface correct_answers {
-  answers: string[] | undefined;
+  answers: string[] ;
+  user_answers: string[] ;
 }
 
 const initialState: correct_answers = {
-  answers: undefined,
+  answers: [],
+  user_answers: []
 };
 
 const answersSlice = createSlice({
@@ -15,6 +17,9 @@ const answersSlice = createSlice({
     setAnwers(state, action: PayloadAction<string[]>) {
       state.answers = action.payload;
     },
+    setUserAnswers(state, action: PayloadAction<string[]>){
+      state.user_answers = action.payload;
+    }
   },
 });
 

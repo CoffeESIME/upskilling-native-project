@@ -19,12 +19,9 @@ export default function index() {
         source={require('../assets/images/QuizIcon.png')}
         style={style.image}
       />
-      <ButtonQ
-        mode="contained"
-        onPress={handlePress}
-        style={style.button}
-        text="Get Started"
-      />
+      <ButtonQ mode="contained" onPress={handlePress} style={style.button}>
+        Get Started
+      </ButtonQ>
     </View>
   );
 }

@@ -20,6 +20,10 @@ export default function Layout() {
             name="quotes"
             options={{ headerShown: false, statusBarColor: 'black' }}
           />
+          <Stack.Screen
+            name="review"
+            options={{ headerShown: false, statusBarColor: 'black' }}
+          />
         </Stack>
       </PaperProvider>
     </Provider>

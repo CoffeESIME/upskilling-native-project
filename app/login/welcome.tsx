@@ -10,7 +10,7 @@ export default function Welcome() {
   return (
     <View style={style.container}>
       <Text style={style.t1}>Welcome to the app</Text>
-      <ButtonQ mode="contained" onPress={handlePress} style={style.button} text="Start Quiz" />
+      <ButtonQ mode="contained" onPress={handlePress} style={style.button} >Start Quiz</ButtonQ>
     </View>
   );
 }
