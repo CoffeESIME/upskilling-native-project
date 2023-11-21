@@ -7,20 +7,20 @@ export default function Layout() {
   return (
     <Provider store={store}>
       <PaperProvider>
-      <Stack>
-        <Stack.Screen
-          name="index"
-          options={{ headerShown: false, statusBarColor: 'black' }}
-        />
-        <Stack.Screen
-          name="login"
-          options={{ headerShown: false, statusBarColor: 'black' }}
-        />
-        <Stack.Screen
-          name="quotes"
-          options={{ headerShown: false, statusBarColor: 'black' }}
-        />
-      </Stack>
+        <Stack>
+          <Stack.Screen
+            name="index"
+            options={{ headerShown: false, statusBarColor: 'black' }}
+          />
+          <Stack.Screen
+            name="login"
+            options={{ headerShown: false, statusBarColor: 'black' }}
+          />
+          <Stack.Screen
+            name="quotes"
+            options={{ headerShown: false, statusBarColor: 'black' }}
+          />
+        </Stack>
       </PaperProvider>
     </Provider>
   );

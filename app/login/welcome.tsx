@@ -9,8 +9,8 @@ export default function Welcome() {
   };
   return (
     <View style={style.container}>
-      <Text style={style.t1}> Welcome to the app </Text>
-      <ButtonQ mode="contained" onPress={handlePress} text="Start Quiz" />
+      <Text style={style.t1}>Welcome to the app</Text>
+      <ButtonQ mode="contained" onPress={handlePress} style={style.button} text="Start Quiz" />
     </View>
   );
 }
@@ -19,8 +19,19 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
+    gap: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   t1: {
     fontSize: 35,
+    color: 'white',
   },
+  button:{
+    flex: 1,
+    maxHeight: 40,
+    height: 15,
+    width: '50%',
+    maxWidth: 300,
+  }
 });

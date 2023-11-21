@@ -4,12 +4,11 @@ import { StyleSheet } from 'react-native';
 export const ButtonQ: React.FC<ButtonQProps> = ({
   text,
   onPress,
-  mode= 'contained',
+  mode = 'contained',
   style,
 }) => {
-  console.log('press');
   return (
-    <Button mode={mode} onPress={onPress} style={[styles.button, style]}>
+    <Button mode={mode} onPress={onPress} style={[styles.button, style]} >
       {text}
     </Button>
   );

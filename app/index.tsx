@@ -56,13 +56,13 @@ const style = StyleSheet.create({
     width: '100%',
     maxWidth: 800,
     alignSelf: 'center',
-    margin: 60
+    margin: 60,
   },
   button: {
     flex: 1,
     alignSelf: 'center',
     maxHeight: 45,
     width: '50%',
-    maxWidth: 300
+    maxWidth: 300,
   },
 });

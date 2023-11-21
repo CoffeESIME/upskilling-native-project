@@ -16,7 +16,7 @@ export const ControlledInputQ: React.FC<ControllerInputQProps> = ({
         field: { value, onBlur, onChange },
         fieldState: { error, invalid },
       }) => (
-        <View style={{width: "100%", maxWidth: 300}}>
+        <View style={{ width: '100%', maxWidth: 300 }}>
           <TextInput
             {...textInputProps}
             onBlur={onBlur}
@@ -29,7 +29,6 @@ export const ControlledInputQ: React.FC<ControllerInputQProps> = ({
           </HelperText>
         </View>
       )}
-      
     />
   );
 };

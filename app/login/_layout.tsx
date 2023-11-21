@@ -7,11 +7,10 @@ import { View, StyleSheet } from 'react-native';
 export default function LoginLayout() {
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
   return !isLoggedIn ? (
-    <Slot />
+    <Slot/>
   ) : (
-    
     <View style={style.container}>
-      <HeaderQ /> <Welcome />
+      <HeaderQ/><Welcome/>
     </View>
   );
 }

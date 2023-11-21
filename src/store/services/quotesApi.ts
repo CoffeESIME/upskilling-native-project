@@ -1,12 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 // api.php?amount=10&difficulty=hard
-interface question {
+export interface question {
     category: string;
     type: string;
-    difficulty: string;
     question: string;
     correct_answer: string;
-    incorrect_answer: string[];
+    incorrect_answers: string[];
   }
 
 interface response {

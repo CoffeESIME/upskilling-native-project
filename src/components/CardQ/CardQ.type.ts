@@ -1,7 +1,11 @@
-import { BasePropsQ } from "../../utils/generalTypes";
+import { question } from "../../store/services/quotesApi";
+import { BasePropsQ } from "../../../utils/generalTypes";
 
 export type CardQProps = BasePropsQ & {
-    title: string;
-    content: string;
-    actions: string;
+    question: question;
+    prev: ()=> void;
+    next: ()=> void;
+    selectAnswer: (answer: string) => void;
+    showNext?: boolean;
+    showPrev?: boolean;
 } 

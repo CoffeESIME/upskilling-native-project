@@ -41,14 +41,14 @@ export default function Login() {
       <ButtonQ
         mode="contained"
         onPress={handleSubmit(onSubmit)}
-        text="Submit"
         style={style.button}
+        text="Submit"
       />
       <ButtonQ
         mode="outlined"
         onPress={onCancel}
-        text="Cancel"
         style={style.button}
+        text="Cancel"
       />
     </View>
   );
@@ -60,6 +60,7 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 10,
+    backgroundColor: 'black'
   },
   button: {
     maxHeight: 40,
@@ -67,6 +68,6 @@ const style = StyleSheet.create({
     alignSelf: 'auto',
     justifyContent: 'flex-start',
     maxWidth: 300,
-    width: '100%'
+    width: '100%',
   },
 });
