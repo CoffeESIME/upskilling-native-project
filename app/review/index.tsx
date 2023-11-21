@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { HeaderQ } from '../../src/components/HeaderQ/HeaderQ';
 import { useAppSelector } from '../../src/store';
 import { ButtonQ } from '../../src/components/ButtonQ/ButtonQ';
@@ -25,25 +25,28 @@ export default function review() {
         <View>
           <HeaderQ />
         </View>
-        {data?.results.map((question, i) => {
+        {data.results.map((question, i) => {
           if (question.correct_answer == user_answers[i]) {
             return (
               <View key={i}>
-                <CardReviewQ question={question.question}>
-                  <Text>Correct {question.correct_answer}</Text>
-                </CardReviewQ>
+                <CardReviewQ
+                  correct={question.correct_answer}
+                  isCorrect={true}
+                  question={question.question}
+                  wrong={user_answers[i]}
+                />
               </View>
             );
           }
 
           return (
             <View key={i}>
-              <CardReviewQ question={replaceHTMLEntities(question.question)}>
-                <Text>
-                  Wrong:{replaceHTMLEntities(user_answers[i])} , Correct Answer
-                  :{replaceHTMLEntities(question.correct_answer)}
-                </Text>
-              </CardReviewQ>
+              <CardReviewQ
+                correct={question.correct_answer}
+                isCorrect={false}
+                question={replaceHTMLEntities(question.question)}
+                wrong={user_answers[i]}
+              />
             </View>
           );
         })}

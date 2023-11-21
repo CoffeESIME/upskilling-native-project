@@ -1,22 +1,37 @@
 import * as React from 'react';
 import { Card, Text } from 'react-native-paper';
-import { ButtonQ } from '../ButtonQ/ButtonQ';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { replaceHTMLEntities } from '../../../utils/helpers';
 
 export interface CardReviewQProps {
-  children: React.ReactNode;
   question: string;
+  isCorrect: boolean;
+  correct: string;
+  wrong: string;
 }
 
 export const CardReviewQ: React.FC<CardReviewQProps> = ({
-  children,
   question,
+  correct,
+  isCorrect,
+  wrong,
 }) => {
+  console.log('iscorred', isCorrect);
   return (
     <Card style={style.container}>
-      <Card.Title title={question} />
-      <Card.Actions style={style.actions}>{children}</Card.Actions>
+      <Text style={{margin: 10, padding:10}}>{replaceHTMLEntities(question)} </Text>
+      {isCorrect ? (
+        <Card.Content style={style.actions}>
+          <Text>Correct {replaceHTMLEntities(correct)}</Text>
+        </Card.Content>
+      ) : (
+        <Card.Content style={style.actions}>
+          <Text>
+            Wrong:{replaceHTMLEntities(wrong)} , Correct Answer :
+            {replaceHTMLEntities(correct)}
+          </Text>
+        </Card.Content>
+      )}
     </Card>
   );
 };
@@ -29,7 +44,8 @@ const style = StyleSheet.create({
     maxHeight: '70%',
     alignContent: 'center',
     justifyContent: 'center',
-    backgroundColor: 'red'
+    backgroundColor: '#A9A9A9',
+    margin: 10,
   },
   button: {
     flexGrow: 1,

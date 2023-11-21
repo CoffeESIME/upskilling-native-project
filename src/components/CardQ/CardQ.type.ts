@@ -12,4 +12,5 @@ export type CardQProps = BasePropsQ & {
   action: ReactNode;
   showAction?: boolean;
   element: number;
+  selectedAnswer: string;
 };

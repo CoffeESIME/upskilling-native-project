@@ -18,7 +18,9 @@ export default function Quotes() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const correctAnswers: string[] = [];
+
   useEffect(() => {
+    setQuestionEl(0);
     if (data?.results) {
       for (const answer in data?.results) {
         correctAnswers.push(data?.results[answer].correct_answer);
@@ -58,74 +60,81 @@ export default function Quotes() {
         <Text>Error Fetching data</Text>
       </View>
     );
+  console.log(responses.findLast);
   return (
-    <View style={style.container}>
-      <View
-        style={{
-          height: '50%',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
+    data && (
+      <View style={style.container}>
         <View
           style={{
-            height: '30%',
+            height: '50%',
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'gray',
-            borderRadius: 30,
           }}
         >
-          <Text
+          <View
             style={{
-              flex: 0,
-              backgroundColor: 'red',
-              fontSize: 40,
-              margin: 20,
-            }}
-          >
-            Select the correct answers
-          </Text>
-          <Text
-            style={{
-              flex: 0,
-              backgroundColor: 'red',
-              fontSize: 20,
-              margin: 10,
-            }}
-          >
-            You will recieve the correction inmediatly
-          </Text>
-        </View>
-      </View>
-      <CardQ
-        action={
-          <ButtonQ
-            onPress={goReview}
-            style={{
-              flexGrow: 0,
-              minHeight: 35,
-              flex: 1,
-              maxHeight: 35,
+              height: '50%',
               alignItems: 'center',
               justifyContent: 'center',
+              backgroundColor: 'gray',
+              borderRadius: 30,
+              padding: 30,
+              margin: 30
             }}
           >
-            <Text>Confirm</Text>
-          </ButtonQ>
-        }
-        element={questionEl}
-        next={goNextEl}
-        prev={goPrevEl}
-        question={data?.results[questionEl]}
-        selectAnswer={action}
-        showAction={questionEl == data?.results.length - 1}
-        showNext={
-          questionEl >= 0 ? questionEl < data?.results.length - 1 : null
-        }
-        showPrev={questionEl > 0}
-      />
-    </View>
+            <Text
+              style={{
+                flex: 0,
+                backgroundColor: 'gray',
+                fontSize: 40,
+                margin: 20,
+              }}
+            >
+              Select the correct answers
+            </Text>
+            <Text
+              style={{
+                flex: 0,
+                backgroundColor: 'gray',
+                fontSize: 20,
+                padding: 10,
+              }}
+            >
+              You will recieve the correct answers at the end of the quiz
+            </Text>
+          </View>
+        </View>
+        <CardQ
+          action={
+            <ButtonQ
+              disabled={responses[responses.length - 1] == ''}
+              onPress={goReview}
+              style={{
+                flexGrow: 0,
+                minHeight: 35,
+                flex: 1,
+                maxHeight: 35,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Text>Confirm</Text>
+            </ButtonQ>
+          }
+          element={questionEl}
+          next={goNextEl}
+          prev={goPrevEl}
+          question={data.results[questionEl]}
+          selectAnswer={action}
+          selectedAnswer={responses[questionEl]}
+          showAction={questionEl == data.results.length - 1}
+          showNext={
+            questionEl >= 0 ? questionEl < data.results.length - 1 : undefined
+          }
+          showPrev={questionEl > 0}
+        />
+      </View>
+    )
   );
 }
 

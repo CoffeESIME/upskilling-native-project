@@ -1,4 +1,4 @@
-import * as React from 'react';
+import { useState } from 'react';
 import { Card, Text } from 'react-native-paper';
 import { CardQProps } from './CardQ.type';
 import { ButtonQ } from '../ButtonQ/ButtonQ';
@@ -14,13 +14,17 @@ export const CardQ: React.FC<CardQProps> = ({
   action,
   showAction = false,
   element,
+  selectedAnswer,
 }) => {
+  const [userAction, setUserAction] = useState<boolean>(true);
   return (
-    <View style={{ height: '50%' }}>
+    <View style={{ height: '50%', margin: 40 }}>
       <Card style={style.container}>
         <Card.Content>
           <View style={{ gap: 10, marginBottom: 10 }}>
-            <Text variant="titleLarge">{question.category}</Text>
+            <Text style={{ textAlign: 'center' }} variant="titleLarge">
+              {replaceHTMLEntities(question.category)}
+            </Text>
             <Text variant="bodyMedium">
               {replaceHTMLEntities(question.question)}
             </Text>
@@ -36,9 +40,15 @@ export const CardQ: React.FC<CardQProps> = ({
             {question.incorrect_answers.map((answer, i) => (
               <TouchableOpacity
                 key={i}
-                onPress={() => selectAnswer(answer, element)}
+                onPress={() => {
+                  setUserAction(false);
+                  selectAnswer(answer, element);
+                }}
                 style={{
-                  backgroundColor: 'red',
+                  backgroundColor:
+                    selectedAnswer == question.incorrect_answers[i]
+                      ? 'gray'
+                      : '#A9A9A9',
                   borderRadius: 10,
                   height: 30,
                   justifyContent: 'center',
@@ -58,9 +68,15 @@ export const CardQ: React.FC<CardQProps> = ({
               </TouchableOpacity>
             ))}
             <TouchableOpacity
-              onPress={() => selectAnswer(question.correct_answer, element)}
+              onPress={() => {
+                setUserAction(false);
+                selectAnswer(question.correct_answer, element);
+              }}
               style={{
-                backgroundColor: 'red',
+                backgroundColor:
+                  selectedAnswer == question.correct_answer
+                    ? 'gray'
+                    : '#A9A9A9',
                 borderRadius: 10,
                 height: 30,
                 justifyContent: 'center',
@@ -77,12 +93,25 @@ export const CardQ: React.FC<CardQProps> = ({
         <Card.Actions style={style.actions}>
           <View style={{ flexDirection: 'row', gap: 10 }}>
             {showPrev ? (
-              <ButtonQ onPress={() => prev()} style={style.button}>
+              <ButtonQ
+                onPress={() => {
+                  setUserAction(false);
+                  prev();
+                }}
+                style={style.button}
+              >
                 Previous
               </ButtonQ>
             ) : null}
             {showNext ? (
-              <ButtonQ onPress={() => next()} style={style.button}>
+              <ButtonQ
+                disabled={userAction}
+                onPress={() => {
+                  next();
+                  setUserAction(true);
+                }}
+                style={style.button}
+              >
                 Next
               </ButtonQ>
             ) : null}

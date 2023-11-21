@@ -6,9 +6,15 @@ export const ButtonQ: React.FC<ButtonQProps> = ({
   onPress,
   mode = 'contained',
   style,
+  disabled = false,
 }) => {
   return (
-    <Button mode={mode} onPress={onPress} style={[styles.button, style]} >
+    <Button
+      disabled={disabled}
+      mode={mode}
+      onPress={onPress}
+      style={[styles.button, style]}
+    >
       {children}
     </Button>
   );
