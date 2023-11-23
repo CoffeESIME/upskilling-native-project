@@ -1,5 +1,5 @@
 import { Text } from 'react-native-paper';
-import { Image, View, StyleSheet } from 'react-native';
+import { Image, View, StyleSheet, Platform } from 'react-native';
 import { useRouter } from 'expo-router';
 import { ButtonQ } from '../src/components/ButtonQ/ButtonQ';
 import React from 'react';
@@ -11,17 +11,31 @@ export default function index() {
   };
   return (
     <View style={style.container}>
-      <View>
+      <View style={style.containerText}>
         <Text style={style.t1}>QuizMaster</Text>
         <Text style={style.t2}>Your Gateway to Endless Learning and Fun!</Text>
       </View>
-      <Image
-        source={require('../assets/images/QuizIcon.png')}
-        style={style.image}
-      />
-      <ButtonQ mode="contained" onPress={handlePress} style={style.button}>
-        Get Started
-      </ButtonQ>
+      <View style={{ alignContent: 'center', justifyContent: 'center' }}>
+        <Image
+          source={require('../assets/images/QuizIcon.png')}
+          style={style.image}
+        />
+      </View>
+      <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          ...Platform.select({
+            android: {
+              flex: 1,
+            },
+          }),
+        }}
+      >
+        <ButtonQ mode="contained" onPress={handlePress} style={style.button}>
+          <Text>Get Started</Text>
+        </ButtonQ>
+      </View>
     </View>
   );
 }
@@ -40,26 +54,51 @@ const style = StyleSheet.create({
     margin: 15,
   },
   containerText: {
-    flex: 3,
+    ...Platform.select({
+      android: {
+        flex: 1,
+      },
+    }),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   container: {
     flex: 1,
-    backgroundColor: 'black',
-    alignItems: 'stretch',
-    gap: 15,
+    alignContent: 'center',
+    justifyContent: 'center',
+    ...Platform.select({
+      android: {
+        backgroundColor: 'black',
+        alignItems: 'stretch',
+        gap: 15,
+      },
+      default: {
+        backgroundColor: 'gray',
+        alignItems: 'stretch',
+        gap: 15,
+      },
+    }),
   },
   image: {
-    flex: 2,
-    width: '100%',
-    maxWidth: 800,
     alignSelf: 'center',
-    margin: 60,
+    alignContent: 'center',
+    justifyContent: 'center',
+    marginVertical: 30,
+    ...Platform.select({
+      android: {
+        flex: 0,
+      },
+    }),
   },
   button: {
-    flex: 1,
-    alignSelf: 'center',
-    maxHeight: 45,
-    width: '50%',
-    maxWidth: 300,
+    ...Platform.select({
+      android: { flex: 0 },
+      default: {
+        flex: 0,
+        minHeight: 35,
+      },
+    }),
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

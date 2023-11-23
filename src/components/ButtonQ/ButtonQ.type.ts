@@ -5,6 +5,6 @@ export type ButtonQProps = BasePropsQ & {
   onPress: () => void;
   mode?: 'outlined' | 'contained' | 'elevated';
   style?: StyleProp<ViewStyle>;
-  children?: ReactNode,
-  disabled?: boolean
+  children?: ReactNode;
+  disabled?: boolean;
 };

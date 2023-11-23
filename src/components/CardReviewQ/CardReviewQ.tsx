@@ -2,13 +2,7 @@ import * as React from 'react';
 import { Card, Text } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { replaceHTMLEntities } from '../../../utils/helpers';
-
-export interface CardReviewQProps {
-  question: string;
-  isCorrect: boolean;
-  correct: string;
-  wrong: string;
-}
+import { CardReviewQProps } from './CardReview.type';
 
 export const CardReviewQ: React.FC<CardReviewQProps> = ({
   question,
@@ -16,20 +10,19 @@ export const CardReviewQ: React.FC<CardReviewQProps> = ({
   isCorrect,
   wrong,
 }) => {
-  console.log('iscorred', isCorrect);
   return (
     <Card style={style.container}>
-      <Text style={{margin: 10, padding:10}}>{replaceHTMLEntities(question)} </Text>
+      <Text style={{ margin: 10, padding: 10 }}>
+        {replaceHTMLEntities(question)}
+      </Text>
       {isCorrect ? (
-        <Card.Content style={style.actions}>
-          <Text>Correct {replaceHTMLEntities(correct)}</Text>
+        <Card.Content style={{...style.actions}}>
+          <Text style={style.textCorrect}>Correct: {replaceHTMLEntities(correct)}</Text>
         </Card.Content>
       ) : (
-        <Card.Content style={style.actions}>
-          <Text>
-            Wrong:{replaceHTMLEntities(wrong)} , Correct Answer :
-            {replaceHTMLEntities(correct)}
-          </Text>
+        <Card.Content style={{ ...style.actions }}>
+          <Text style={style.textWrong}>Wrong: {replaceHTMLEntities(wrong)}</Text>
+          <Text style={style.textCorrect}>Correct Answer: {replaceHTMLEntities(correct)}</Text>
         </Card.Content>
       )}
     </Card>
@@ -38,17 +31,15 @@ export const CardReviewQ: React.FC<CardReviewQProps> = ({
 
 const style = StyleSheet.create({
   container: {
-    flex: 1,
     maxWidth: 500,
-    width: '100%',
-    maxHeight: '70%',
-    alignContent: 'center',
-    justifyContent: 'center',
+    width: '80%',
+    //maxHeight: '100%',
+    alignSelf: 'center',
+    alignItems: 'center',
     backgroundColor: '#A9A9A9',
     margin: 10,
   },
   button: {
-    flexGrow: 1,
     minHeight: 35,
     flex: 1,
     maxHeight: 35,
@@ -56,11 +47,28 @@ const style = StyleSheet.create({
     justifyContent: 'center',
   },
   actions: {
-    flex: 2,
+    flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     alignSelf: 'center',
     gap: 10,
+    backgroundColor: 'gray',
+    margin: 10,
+    padding:10,
+    borderRadius: 10,
+    justifyContent: 'center',
+    maxWidth:'80%'
   },
-  text: { alignContent: 'center', alignSelf: 'center', backgroundColor: 'red' },
+  textCorrect: {
+    alignContent: 'center',
+    alignSelf: 'center',
+    color: 'green',
+    fontWeight: 'bold',
+  },
+  textWrong:{
+    alignContent: 'center',
+    alignSelf: 'center',
+    color: 'red',
+    fontWeight: 'bold',
+  }
 });

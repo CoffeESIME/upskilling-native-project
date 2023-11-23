@@ -1,49 +1,37 @@
 import { ActivityIndicator, Text } from 'react-native-paper';
 import { View, StyleSheet } from 'react-native';
-import { useGetQuotesQuery } from '../../src/store/services/quotesApi';
 import { CardQ } from '../../src/components/CardQ/CardQ';
+import { ButtonQ } from '../../src/components/ButtonQ/ButtonQ';
+import { useRouter } from 'expo-router';
+import { useQuizData } from '../../src/hooks/quizdata-hook';
 import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../src/store';
 import { answersActions } from '../../src/store/features/quotes-slice';
-import { ButtonQ } from '../../src/components/ButtonQ/ButtonQ';
-import { useRouter } from 'expo-router';
 // eslint-disable-next-line react/function-component-definition
 export default function Quotes() {
-  const { data, error, isLoading, isFetching } = useGetQuotesQuery({
-    amount: 10,
-    difficulty: 'hard',
-  });
-  const [questionEl, setQuestionEl] = useState<number>(0);
-  const [responses, setResponses] = useState(['']);
-  const router = useRouter();
+  const { error, isFetching, isLoading, data, questionEl, setQuestionEl } =
+    useQuizData();
   const dispatch = useAppDispatch();
-  const correctAnswers: string[] = [];
-
+  const router = useRouter();
+  const [responses, setResponses] = useState(['']);
   useEffect(() => {
-    setQuestionEl(0);
-    if (data?.results) {
-      for (const answer in data?.results) {
-        correctAnswers.push(data?.results[answer].correct_answer);
-      }
-      setResponses(new Array(data?.results.length).fill(''));
-      dispatch(answersActions.setAnwers(correctAnswers));
+    if (responses[0] !== '') {
+      dispatch(answersActions.setUserAnswers(responses));
     }
-  }, [data]);
-  useEffect(() => {
-    dispatch(answersActions.setUserAnswers(responses));
   }, [responses]);
+  useEffect(() => {
+    setResponses(new Array(data?.results.length).fill(''));
+  }, [data]);
   const action = (answer: string, id: number) => {
     setResponses(
       responses.map((answerEl, index) => (index === id ? answer : answerEl))
     );
   };
   const goNextEl = () => {
-    const next = questionEl + 1;
-    setQuestionEl(next);
+    setQuestionEl((next) => next + 1);
   };
   const goPrevEl = () => {
-    const prev = questionEl - 1;
-    setQuestionEl(prev);
+    setQuestionEl((prev) => prev - 1);
   };
   const goReview = () => {
     router.push('/review/');
@@ -60,47 +48,14 @@ export default function Quotes() {
         <Text>Error Fetching data</Text>
       </View>
     );
-  console.log(responses.findLast);
   return (
     data && (
       <View style={style.container}>
-        <View
-          style={{
-            height: '50%',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <View
-            style={{
-              height: '50%',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: 'gray',
-              borderRadius: 30,
-              padding: 30,
-              margin: 30
-            }}
-          >
-            <Text
-              style={{
-                flex: 0,
-                backgroundColor: 'gray',
-                fontSize: 40,
-                margin: 20,
-              }}
-            >
-              Select the correct answers
-            </Text>
-            <Text
-              style={{
-                flex: 0,
-                backgroundColor: 'gray',
-                fontSize: 20,
-                padding: 10,
-              }}
-            >
-              You will recieve the correct answers at the end of the quiz
+        <View style={style.mainContainer}>
+          <View style={style.instructionsContainer}>
+            <Text style={style.mainText}>Select the correct answers</Text>
+            <Text style={style.secondaryText}>
+              You will receive the correct answers at the end of the quiz
             </Text>
           </View>
         </View>
@@ -108,17 +63,11 @@ export default function Quotes() {
           action={
             <ButtonQ
               disabled={responses[responses.length - 1] == ''}
+              mode="contained"
               onPress={goReview}
-              style={{
-                flexGrow: 0,
-                minHeight: 35,
-                flex: 1,
-                maxHeight: 35,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
+              style={style.confirmButton}
             >
-              <Text>Confirm</Text>
+              Confirm
             </ButtonQ>
           }
           element={questionEl}
@@ -128,6 +77,7 @@ export default function Quotes() {
           selectAnswer={action}
           selectedAnswer={responses[questionEl]}
           showAction={questionEl == data.results.length - 1}
+          //showAction={true}
           showNext={
             questionEl >= 0 ? questionEl < data.results.length - 1 : undefined
           }
@@ -147,5 +97,36 @@ const style = StyleSheet.create({
     alignContent: 'center',
     alignSelf: 'center',
     width: '100%',
+  },
+  mainContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  instructionsContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'gray',
+    borderRadius: 30,
+    padding: 0,
+    margin: 30,
+  },
+  mainText: {
+    flex: 0,
+    backgroundColor: 'gray',
+    fontSize: 25,
+    margin: 20,
+  },
+  secondaryText: {
+    flex: 0,
+    fontSize: 15,
+    margin: 20,
+  },
+  confirmButton: {
+    flexGrow: 1,
+    minHeight: 35,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxWidth: '40%',
   },
 });

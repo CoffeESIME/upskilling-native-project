@@ -21,7 +21,6 @@ export const ControlledInputQ: React.FC<ControllerInputQProps> = ({
             {...textInputProps}
             onBlur={onBlur}
             onChangeText={onChange}
-            style={{}}
             value={value}
           />
           <HelperText type="error" visible={invalid}>

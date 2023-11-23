@@ -1,57 +1,85 @@
-import { View } from 'react-native';
+import { StyleSheet, View, Platform, ScrollView } from 'react-native';
 import { HeaderQ } from '../../src/components/HeaderQ/HeaderQ';
 import { useAppSelector } from '../../src/store';
 import { ButtonQ } from '../../src/components/ButtonQ/ButtonQ';
 import { useRouter } from 'expo-router';
-import { useGetQuotesQuery } from '../../src/store/services/quotesApi';
-import { replaceHTMLEntities } from '../../utils/helpers';
 import { CardReviewQ } from '../../src/components/CardReviewQ/CardReviewQ';
-import { useEffect } from 'react';
+import { useQuizData } from '../../src/hooks/quizdata-hook';
 export default function review() {
-  const { refetch, data } = useGetQuotesQuery({
-    amount: 10,
-    difficulty: 'hard',
-  });
+  const { refetch, data } = useQuizData();
   const { user_answers } = useAppSelector((state) => state.quotes);
   const router = useRouter();
   const pressReturn = () => {
     refetch();
     router.push('/quotes/');
   };
-  useEffect(() => {});
   return (
     data && (
-      <View>
-        <View>
+      <ScrollView style={style.container}>
+        <View style={style.header}>
           <HeaderQ />
         </View>
         {data.results.map((question, i) => {
-          if (question.correct_answer == user_answers[i]) {
-            return (
-              <View key={i}>
-                <CardReviewQ
-                  correct={question.correct_answer}
-                  isCorrect={true}
-                  question={question.question}
-                  wrong={user_answers[i]}
-                />
-              </View>
-            );
-          }
-
+          const isCorrectAnswer = question.correct_answer == user_answers[i];
           return (
-            <View key={i}>
+            <View
+              key={i}
+              style={{
+                flex: 1,
+                alignContent: 'center',
+                justifyContent: 'center',
+                ...Platform.select({
+                  android: {
+                    margin: 0,
+                  },
+                  web: {
+                    margin: 20,
+                  },
+                }),
+              }}
+            >
               <CardReviewQ
                 correct={question.correct_answer}
-                isCorrect={false}
-                question={replaceHTMLEntities(question.question)}
+                isCorrect={isCorrectAnswer}
+                question={question.question}
                 wrong={user_answers[i]}
               />
             </View>
           );
         })}
-        <ButtonQ onPress={pressReturn}>Take again</ButtonQ>
-      </View>
+        <View>
+          <ButtonQ
+            onPress={pressReturn}
+            style={{
+              margin: 10,
+              alignSelf: 'center',
+              width: '40%',
+              ...Platform.select({
+                web: {
+                  flexGrow: 1,
+                  maxHeigth: 35,
+                },
+              }),
+            }}
+          >
+            Take again
+          </ButtonQ>
+        </View>
+      </ScrollView>
     )
   );
 }
+
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    gap: 30,
+  },
+  header: {
+    ...Platform.select({
+      android: {
+       
+      },
+    }),
+  },
+});

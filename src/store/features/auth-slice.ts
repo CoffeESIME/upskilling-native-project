@@ -2,10 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface authState {
   isLoggedIn: boolean;
+  defaultPassword: string;
+  defaultUser: string;
 }
 
 const initialState: authState = {
   isLoggedIn: false,
+  defaultPassword: 'RamdomPass123',
+  defaultUser: 'quiz@email.com',
 };
 
 const authSlice = createSlice({

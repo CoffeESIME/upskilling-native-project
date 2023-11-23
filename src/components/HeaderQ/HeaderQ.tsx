@@ -1,11 +1,11 @@
 import { useAppDispatch } from '../../store';
 import { authActions } from '../../store/features/auth-slice';
 import { Appbar, Menu } from 'react-native-paper';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { Text } from 'react-native-paper';
 import { View } from 'react-native';
-export const HeaderQ = () => {
+export const HeaderQ: React.FC = () => {
   const [visible, setInvisible] = useState<boolean>(false);
   const openMenu = () => setInvisible(true);
   const closeMenu = () => setInvisible(false);

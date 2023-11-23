@@ -19,7 +19,7 @@ const answersSlice = createSlice({
     },
     setUserAnswers(state, action: PayloadAction<string[]>){
       state.user_answers = action.payload;
-    }
+    },
   },
 });
 

@@ -1,6 +1,5 @@
-import { Slot } from "expo-router";
+import { Slot } from 'expo-router';
 
-export default function reviewLayout (){
-
-    return (<Slot/>)
+export default function reviewLayout() {
+  return <Slot />;
 }
