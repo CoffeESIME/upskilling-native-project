@@ -5,7 +5,9 @@ export const replaceHTMLEntities = (text: string) => {
     .replace(/&amp;/g, '&')
     .replace(/&#039;/g, "'")
     .replace(/&deg;/g, '°')
-    .replace(/&shy;/g, '­');
+    .replace(/&shy;/g, '­')
+    .replace(/%aacute;/g, 'á')
+    .replace(/&euml;/g, 'ë');
 };
 
 export function shuffleArray(array: string[]) {

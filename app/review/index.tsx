@@ -74,6 +74,7 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     gap: 30,
+    backgroundColor: 'black'
   },
   header: {
     ...Platform.select({

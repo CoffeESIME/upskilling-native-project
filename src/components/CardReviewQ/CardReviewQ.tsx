@@ -12,7 +12,7 @@ export const CardReviewQ: React.FC<CardReviewQProps> = ({
 }) => {
   return (
     <Card style={style.container}>
-      <Text style={{ margin: 10, padding: 10 }}>
+      <Text style={{ margin: 10, padding: 10, color: 'black' }}>
         {replaceHTMLEntities(question)}
       </Text>
       {isCorrect ? (
@@ -33,7 +33,6 @@ const style = StyleSheet.create({
   container: {
     maxWidth: 500,
     width: '80%',
-    //maxHeight: '100%',
     alignSelf: 'center',
     alignItems: 'center',
     backgroundColor: '#A9A9A9',
@@ -52,7 +51,7 @@ const style = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     gap: 10,
-    backgroundColor: 'gray',
+    backgroundColor: '#D3D3D3',
     margin: 10,
     padding:10,
     borderRadius: 10,

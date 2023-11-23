@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
 import { Text } from 'react-native-paper';
 import { View } from 'react-native';
+import { Platform } from 'react-native';
 export const HeaderQ: React.FC = () => {
   const [visible, setInvisible] = useState<boolean>(false);
   const [menuFired, setMenuFired] = useState<number>(0);
@@ -35,7 +36,7 @@ export const HeaderQ: React.FC = () => {
         anchor={
           <Appbar.Action icon="menu" iconColor="white" onPress={openMenu} />
         }
-        anchorPosition="bottom"
+        anchorPosition={Platform.OS == 'android' ? undefined : 'bottom'}
         onDismiss={closeMenu}
         visible={visible}
       >
