@@ -22,22 +22,7 @@ export default function review() {
         {data.results.map((question, i) => {
           const isCorrectAnswer = question.correct_answer == user_answers[i];
           return (
-            <View
-              key={i}
-              style={{
-                flex: 1,
-                alignContent: 'center',
-                justifyContent: 'center',
-                ...Platform.select({
-                  android: {
-                    margin: 0,
-                  },
-                  web: {
-                    margin: 20,
-                  },
-                }),
-              }}
-            >
+            <View key={i} style={style.viewCards}>
               <CardReviewQ
                 correct={question.correct_answer}
                 isCorrect={isCorrectAnswer}
@@ -48,20 +33,7 @@ export default function review() {
           );
         })}
         <View>
-          <ButtonQ
-            onPress={pressReturn}
-            style={{
-              margin: 10,
-              alignSelf: 'center',
-              width: '40%',
-              ...Platform.select({
-                web: {
-                  flexGrow: 1,
-                  maxHeigth: 35,
-                },
-              }),
-            }}
-          >
+          <ButtonQ onPress={pressReturn} style={style.button}>
             Take again
           </ButtonQ>
         </View>
@@ -74,12 +46,34 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     gap: 30,
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+  },
+  viewCards: {
+    flex: 1,
+    alignContent: 'center',
+    justifyContent: 'center',
+    ...Platform.select({
+      android: {
+        margin: 0,
+      },
+      web: {
+        margin: 20,
+      },
+    }),
   },
   header: {
     ...Platform.select({
-      android: {
-       
+      android: {},
+    }),
+  },
+  button: {
+    margin: 10,
+    alignSelf: 'center',
+    width: '40%',
+    ...Platform.select({
+      web: {
+        flexGrow: 1,
+        maxHeigth: 35,
       },
     }),
   },

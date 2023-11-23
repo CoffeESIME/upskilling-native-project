@@ -34,7 +34,11 @@ export const HeaderQ: React.FC = () => {
     >
       <Menu
         anchor={
-          <Appbar.Action icon="menu" iconColor="white" onPress={openMenu} />
+          <Appbar.Action
+            icon="menu"
+            onPress={openMenu}
+            style={{backgroundColor: 'black'}}
+          />
         }
         anchorPosition={Platform.OS == 'android' ? undefined : 'bottom'}
         onDismiss={closeMenu}

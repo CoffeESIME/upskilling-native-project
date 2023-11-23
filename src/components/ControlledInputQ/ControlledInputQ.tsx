@@ -21,6 +21,7 @@ export const ControlledInputQ: React.FC<ControllerInputQProps> = ({
             {...textInputProps}
             onBlur={onBlur}
             onChangeText={onChange}
+            secureTextEntry={name == 'password' ? true : false}
             value={value}
           />
           <HelperText type="error" visible={invalid}>
