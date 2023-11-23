@@ -123,7 +123,6 @@ const style = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 25,
     gap: 10,
-    //   minHeight: '20%',
   },
   text: { alignContent: 'center', alignSelf: 'center', backgroundColor: 'red' },
   containerOptions: {

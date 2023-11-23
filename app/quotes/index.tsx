@@ -13,7 +13,7 @@ export default function Quotes() {
     useQuizData();
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const [responses, setResponses] = useState(['']);
+  const [responses, setResponses] = useState<string[]>(['']);
   useEffect(() => {
     if (responses[0] !== '') {
       dispatch(answersActions.setUserAnswers(responses));

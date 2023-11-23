@@ -7,8 +7,15 @@ import { Text } from 'react-native-paper';
 import { View } from 'react-native';
 export const HeaderQ: React.FC = () => {
   const [visible, setInvisible] = useState<boolean>(false);
-  const openMenu = () => setInvisible(true);
-  const closeMenu = () => setInvisible(false);
+  const [menuFired, setMenuFired] = useState<number>(0);
+
+  const openMenu = () => {
+    setInvisible(true);
+    setMenuFired(Date.now());
+  };
+  const closeMenu = () => {
+    if (Date.now() - menuFired > 400) setInvisible(false);
+  };
   const dispatch = useAppDispatch();
   const router = useRouter();
   const handleLogOut = () => {
@@ -28,6 +35,7 @@ export const HeaderQ: React.FC = () => {
         anchor={
           <Appbar.Action icon="menu" iconColor="white" onPress={openMenu} />
         }
+        anchorPosition="bottom"
         onDismiss={closeMenu}
         visible={visible}
       >
